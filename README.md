@@ -822,3 +822,113 @@ print(location_data_sv.sort_index())#this sorts the index values but it doesnt o
 location_data_sv = location_data_sv.sort_index(ascending = True) #we do this because we are telling it that we want to organize the index and since we set ascedning as true it will ascend them both
 print(location_data_sv.head()) #this will show us only the first 5 that we have organized
 ```
+- Data frame is like a table in which it contains a tabular structure that contains multiple observations for given set of variables
+- It contains two dimensions where it has two points of reference being the column of interest and the relevent row
+- A series can contain data of its own type
+- so the column from the dataframe is a series object itself
+- dataframes are heterogenerous which means that the data are of the same type within each column but it could be a different data type for each column and are implicitly or explicitly labelled with an index
+- A DataFrame is a data structure that organizes data into a 2-dimensional table of rows and columns, much like a spreadsheet
+```py
+import pandas as pd
+import numpy as np
+
+array_a = np.array([[3,2,1], [6,3,2]])
+
+print(array_a)
+print(pd.DataFrame(array_a)) #this will return a 2d array where it counts the rows and columns by index 
+
+#if we dont name the columns and row it will define as 0-? but if we want to name it we can do as below
+
+df = pd.DataFrame(array_a, columns = ['Column1', 'Column2', 'Column3'], index = ['row1', 'row2'])
+#if we want to add the row we have to use index to name it or it wont work
+
+print(df)
+
+data = pd.read_csv('Lending-company.csv', index_col = 'LoanID') #using loanid we dont have to use default index to show on our table
+lending_co_data = data.copy()
+
+print(lending_co_data.head())
+```
+- Common attributes working with dataframes
+- A DataFrame object has two axes: “axis 0” and “axis 1”. “axis 0” represents rows and “axis 1” represents columns.
+```py
+#we can use below so that it can show us all the columns in our data
+lending_co_data.columns
+
+#axis returns the rows and column name and types
+lending_co_data.axes
+
+#datatypes returns all column names on left and types on the right
+lending_co_data.dtypes
+
+#.values shows 2d array output of object which will be stored in an array
+lending_co_data.values
+
+#use this method if we have to convert to a numpy array
+lending_co_data.to_numpy()
+
+#it shows the dimention of the object by showing how many elements are in it and how many columns and rows output: (rows, columns)
+lending_co_data.shape
+```
+- Data selection in pandas dataframe
+- dataframe or subset selection in panfas dataframe means extracting elements, rows, columns, or subsets from such an object
+- data selection allows us to work on just a portion of a dataset
+- indexing: using one or both types of indexes a dataframe has
+- the row index and the column index to access or select specific parts of the data
+```py
+import pandas as pd
+
+data = pd.read_csv('Lending-company.csv', index_col = 'StringID')
+lending_co_data = data.copy()
+
+print(lending_co_data.Product) #if we know how the table looks and we want to output a specific column that we know is there we can do as shown above, its calling the products column to output
+
+#another way to get this output is by using the indexing operator
+print(lending_co_data['Product']) #we can also add multiple columns we want it to output
+#this way is more efficient because itll still work even with white spaces
+prod_loc=['Location', 'Product'] #the column names need to be in order or itll return an error
+lending_co_data[prod_loc].head()
+```
+
+- .iloc in pandas is defined as integer index-based which means that we specify rows and columns by their integer index
+- Its also knows as attribute indexer or accesser
+```py
+import pandas as pd
+
+data = pd.read_csv('Lending-company.csv', index_col = 'StringID')
+lending_co_data = data.copy()
+
+#if we want to get the position of the column we cant do something like location_co_data[0] instead we have to either call it by its name or use iloc to return the index position name and attributes
+
+lending_co_data.iloc[1] #if we do 1 then it will show us all the information for the second row 
+
+#but if we do something like below we will look for the row and column specifier 
+lending_co_data.iloc[1, 3]
+#in this case the way its formatted it will go to the first row of the person and look for the second column since we stopped at 3 which will return location becuase its in index 1 = 2nd person and ends at index 3 = 4th column
+
+lending_co_data.iloc[1,:] #we can use the column on the right side to show us all of the second row in the dataframe vise versa
+lending_co_data.iloc[:, 3]
+
+print(lending_co_data.iloc[[1, 3], :]) #if we want to get the entire rows specified we can do as shown 
+
+print(lending_co_data.iloc[:, [1, 3]])#if we want to get the entire columns specified we can do as shown 
+```
+- .loc() is defined as index labeling the rows and columns rather than indexing like iloc does
+![Loc and Iloc](./images/locmiloc.png)
+```py
+import pandas as pd
+
+data = pd.read_csv('Lending-company.csv', index_col = 'StringID')
+lending_co_data = data.copy() #creating file object
+
+print(lending_co_data.loc['id_3']) #we can do this because when we do StringID itll return the id as specific labels and if we want it to return with the attribute details we can do it as shown.
+print(lending_co_data.loc['id_3', :])
+#we can also do as shown above and itll return the same thing because we are letting it know that we want all columns to be shown for this specified id
+
+#we can also specify the name of the column we want returned from the id we are looking at by doing like below
+print(lending_co_data.loc['id_3', 'Region'])
+
+print(lending_co_data.loc[:, 'Location']) #with this we will get returned all the Location of all rows
+```
+- ![Loc and Iloc](./images/locs.png)
+- 

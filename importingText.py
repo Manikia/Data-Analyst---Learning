@@ -1,15 +1,21 @@
 import pandas as pd
 
-data = pd.read_csv('Location.csv', squeeze = True)
-location_data = data.copy()
+data = pd.read_csv('Lending-company.csv', index_col = 'LoanID')
+lending_co_data = data.copy() #creating file object
 
-location_data.sort_values(ascending=False)
+#if we want to look at information in the last column we have to do -1 to show we want the last one
+lending_co_data.iloc[:, -1]
 
-location_data_sv = location_data.sort_values(ascending=False)
+#we can also do as below where it only gets the row specifier
+lending_co_data['TotalPrice'].iloc[0] #for example this will return only the total price in the position of 0
 
-print(location_data_sv.sort_values()) #this sorts the values of the output, this is only useful if we want ton obtain the sorted index structure as a separate entitiy for some reason
-print(location_data_sv.sort_index())#this sorts the index values but it doesnt overwrite the contents
+#if we dont use iloc then we have to use the exact id number in the brackets where iloc is and remove iloc to get the same result, if not it wont work, shown as below should work:
 
-#if we want to organize both we have to do as below
-location_data_sv = location_data_sv.sort_index(ascending = True) #we do this because we are telling it that we want to organize the index and since we set ascedning as true it will ascend them both
-print(location_data_sv.head()) #this will show us only the first 5 that we have organized
+lending_co_data['TotalPrice'][1]
+
+#using iloc we can use strings of the name of what indexes we are looking for or index numbers, its vise versa and can work together
+
+#chained indexing is when The flexibility of pandas allows for chained indexing, where you can repeatedly index the outcome of a previous indexing operation but its not encouraged to use
+
+#we can also use both in one line
+print(lending_co_data.loc[:, 'TotalPrice'].iloc[[0,5]])
