@@ -931,4 +931,157 @@ print(lending_co_data.loc['id_3', 'Region'])
 print(lending_co_data.loc[:, 'Location']) #with this we will get returned all the Location of all rows
 ```
 - ![Loc and Iloc](./images/locs.png)
-- 
+```py
+import pandas as pd
+
+data = pd.read_csv('Lending-company.csv', index_col = 'LoanID')
+lending_co_data = data.copy() #creating file object
+
+#if we want to look at information in the last column we have to do -1 to show we want the last one
+lending_co_data.iloc[:, -1]
+
+#we can also do as below where it only gets the row specifier
+lending_co_data['TotalPrice'].iloc[0] #for example this will return only the total price in the position of 0
+
+#if we dont use iloc then we have to use the exact id number in the brackets where iloc is and remove iloc to get the same result, if not it wont work, shown as below should work:
+
+lending_co_data['TotalPrice'][1]
+
+#using iloc we can use strings of the name of what indexes we are looking for or index numbers, its vise versa and can work together
+
+#chained indexing is when The flexibility of pandas allows for chained indexing, where you can repeatedly index the outcome of a previous indexing operation but its not encouraged to use
+
+#we can also use both in one line
+print(lending_co_data.loc[:, 'TotalPrice'].iloc[[0,5]])
+```
+- Indexing in numpy
+```py
+import numpy as np
+
+#we can reference how to call the information by visualizing the double array both ontop of each other so the first row is 0 and second is 1 and if we want to know the position for example of 6 we would have to do [1][2] because its in the second row and its in the third position
+array_a = np.array([[1,2,3],[4,5,6]])
+
+#to get a specific value from our array we do
+print(array_a[0])
+#and this will return the 1,2,3 since its in the first position
+
+#since this current array is a 2d array we have to provide an index for each dimension of the variable like array_a[][] but we can also do one bracket instead itll still work
+
+#if we want to get the whole riows of the data we can use the : like shown
+
+#[row, column] format
+print(array_a[:, 0]) #this is saying that anyrow as long as its the first column 
+```
+- Negative indices
+- integers can be negative
+- traverses the array backwards
+- negative indices start at -1
+
+- Assigning values in numpy
+- to replace a variable in an array we can do something as shown below
+```py
+array_a[0,2] = 9
+#it will replace the number in the row 0 and column 2 with 9
+#we can also change the whole row or column at a time by doing array_a[0] = #
+#we can also replace an array row or column with another array or list
+array_a[:, 0] = 9
+```
+- Element wise refers to calculating the mathmatical comp[utation to each element of the array so we can do something like below
+```py
+array_a = np.array([7,8,9])
+array_a + 2
+
+#and it will return the array increased by 2
+#we can use any operator and it will work
+```
+- The order matters just like it will matter in normal numbers
+- if we were to want to add another index variable to our array we can do something like:
+```py
+array_a + [5]
+#and it will add 5 at the end of the array
+#we can also do something like below where it will add the second array to the first array like with the first element will add to the first, second to second, and third to third etc only on the one row we specified
+array_a + array_b[0] #row 0 will be used to add onto array_a but will only work if the length matches
+```
+- Types of data types that is supported in numpy
+- The default data type of a numpy array is set to none 
+- if we want to set the datatype we have to set the dtpe = int or whatever you want it to set it to
+- In numpy arrays it supports:
+![Types Supported](./images/types.png)
+- if we set an array as a boolean type anything above 0 will be true but once its set as a 0 in the array itll turn to false
+```py
+import numpy as np
+
+array_a = np.array([[1,2,3], [4,5,6]], dtype = int) #we set the variable type as an int instead of nothing
+
+array_b = np.array([[1,2,3], [4,5,6]], dtype = "float32")
+
+
+#we can also set the datatype by doing np.float or np.int ect
+```
+- Characteristics of Numpy functions
+- Universal functions work with numpy arrays and work on an element-by-element basis which means that its an extension of the elementwise operations
+- it includes mathematical, trig, and com,parision functions/operations
+[UFcuntions Link Documentation](https://numpy.org/doc/stable/reference/ufuncs.html#)
+- Broadcasting
+    - If we want to use operations on elements that are different sizes or dimentions we can use broadcast to create a broadcasted version of the smaller elements with the size of a larger one. Its shown in the below image, its the second matrix where its multiplying the smaller element size
+    ![Broadcast](./images/broadcast.png)
+    - There are 3 broadcasting rules we have to follow for it to work automatically:
+        1. The arrays have the same shape
+        2. The arrays have the same number of dimenstions and the length of each dimention is either common or 1
+        3. The arrays that have too few dimensions can have their shapes altered with dimension 1 to satisfy the second rule
+```py
+import numpy as np
+
+#first two are vectors
+array_a = np.array([1,2,3])
+array_b = np.array([[1],[2]])
+
+#last one is matrix
+matrix_c = np.array([[1,2,3], [4,5,6]])
+
+#we can use this example as shown below:
+
+array_c = np.add(array_a, matrix_c) 
+print(array_c)
+```
+- Type Casting
+- Taking an element from an array and changing its datatype
+- For example if we are working with integer arrays we can cast it so that it can change to floats after operating on them
+- We can do this by referncing the previous arrays and setting the dtype to something new:
+```py
+array_c = np.add(array_a, matrix_c, dtype = np.float64)
+``` 
+- doing this will change the input type as well so the arrays will now be the new type, not only the output
+- Running over an Axis
+- Breaks down a nd-array into smaller arrays of n-1 many dimensions
+- It will apply the function to each of the elements
+- Usually used when trying to run a function along each row or column
+```py
+import numpy as np
+
+#first two are vectors
+array_a = np.array([1,2,3])
+array_b = np.array([[1],[2]])
+
+#last one is matrix
+matrix_c = np.array([[1,2,3], [4,5,6]])
+
+np.mean(matrix_c, axis = 0) #in this part we are finding the mean of each column of the array since the axis is at 0 but if its at 1 it will find the mean for rows instead
+
+#the way it works is that it checks the mean of each column in every index for example it checks the mean in 1 and 4, 2 and 5, lastly 3 and 6 which returns 2.5, 3.5, 4.5 which is true
+```
+- NArrays
+    - array and ndarrays are the same thing
+    - They are a sequence of numeric vaules
+    - we can use .shape[0] or .shape[1] to show us the row (0) or columns (1)
+    - if we set an array with only one number it will return the shape of null because it has no dimension to it
+- Array vs Lists
+    - lists returns an output of everything in a single line while arrays does it on top of each other like a matrix
+    - lists dont have shapes while arrays do
+    - lists instead have lengths (len()) where it shows how many of the small lists are part of the bigger one
+    - if we want to know how many elements are in the lists we have to do len(list_a[0]) where 0 is the first position of the list and it will return the length of how many variables are inside of the first list element (first sublist)
+    - if we were to use the addition operator in lists it will concat the two lists but if we use it on an array it adds them up
+- String vs Object vs Number
+    - we can import a file by setting the dtype when we are calling it
+    - ex: lending_co = np.genfromtxt('lending.csv', delimiter = ',', dtype = str)
+    - 
