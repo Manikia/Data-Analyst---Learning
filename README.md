@@ -1084,4 +1084,94 @@ np.mean(matrix_c, axis = 0) #in this part we are finding the mean of each column
 - String vs Object vs Number
     - we can import a file by setting the dtype when we are calling it
     - ex: lending_co = np.genfromtxt('lending.csv', delimiter = ',', dtype = str)
-    - 
+
+- Slicing in numpy
+```py
+import numpy as np
+
+matrix_a = np.array([[1,2,3],[4,5,6]])
+
+#Basic slicing
+matrix_a[:] #the colon means that it begins where we set on the left and ends -1 where we set on the right
+
+matrix_b = matrix_a[1:,:2] #if we want to return a specific slice where we modify both
+#left is rows and right is columns
+#the sbove since we have 1: it means that for the rows we want to work starting only with the first index which is 4,5,6 and in the second part we are saying we want to work with everything before 2-1 index which will be 4,5 which is why when it returns it gives us 4,5
+
+print(matrix_a)
+print(matrix_b)
+```
+- Stepwise slicing
+    - used when we dont take consecutive values and instead when they are a certain distant apart
+```py
+import numpy as np
+
+matrix_a = np.array([[1,1,1,2,0], [3,6,6,7,4], [4,5,3,8,0]])
+
+#we can set the steps by setting it as below:
+# matrix_a[a:b:c] a = start, b = stop, c = by how many steps
+
+new = matrix_a[0:2:2, 1:3:2] #the comma separates the [row, column]
+#the above is basicallt saying for the columns start from the first one and end at the nineth one and when u begin take the step by getting every 3 in the column but when you go to the rows I want you to start at the second index and stop at 10 and go every 3 steps as well. 
+# if we were to use negatives to start from the bottom we would be getting the array backwards/reversed
+# Prediction we will get returned: 1 becuase we are looking where its overlapping and with the row and column we see that only 1 gets overlapped more times
+
+#[1,1,1,2,0]
+#[3,6,6,7,4]
+#[4,5,3,8,0]
+
+print(new)
+```
+- Conditional Slicing
+```py
+import numpy as np
+
+matrix_c = np.array([[1,1,1,2,0], [3,6,6,7,4], [4,5,3,8,0]])
+
+new = matrix_c[:, 0]#this will return all the columns that start at 0 so 1,3,4
+
+#if we want to use conditions we can do that as well by doing
+print(new <2)
+
+#we can also do the whole array
+print(matrix_c[:,:] > 2)
+
+#if we want to know which index is greater or less than 2 we do:
+#this will return all of the variables that are bigger than 2
+print(matrix_c[(matrix_c[:,:] > 2 )&(matrix_c[:,:] < 4)])
+```
+- Dimensions and Squeeze Function
+```py
+import numpy as np
+
+matrix_d = np.array([[1,1,1,2,0], [3,6,6,7,4], [4,5,3,8,0]])
+
+#Depending on our syntax: matrix_d[0,0] or matrix_d[0, 0:1] even though they return the same thing, the first one will be type numpy while the second is a numpy array instead. it changed based on syntax
+
+#if we were to do matrix_d[0:1, 0:1] we will get returned a 2d array bc of the syntax we are doing. we can check it by using shape as well
+
+matrix_d[0,0].shape
+matrix_d[0,0:1].shape
+matrix_d[0:1,0:1].shape
+
+#returns:
+#() - scalar
+#(1,) - vector
+#(1,1) - matrix
+
+#bc of this, the squeeze method is able to remove the unecessary dimensions of an array, so for example we have an array that is a matrix due to its output: [[1]] we will use the squeeze method to clean and return 1 instead
+
+#this is shown below:
+
+print(matrix_d[0:1, 0:1])
+print(matrix_d[0:1, 0:1].squeeze())
+print(matrix_d[0:1, 0:1].squeeze().shape) #returns () bc theres no dimension to it and its just a letter since its been cleared w squeeze
+
+#squeeze can also work as:
+np.squeeze(matrix_d[0:1, 0:1])
+
+#with the below it will clear every dimension and return () bc it removes the dimensions
+matrix_d[0,0].squeeze().shape
+matrix_d[0,0:1].squeeze().shape
+matrix_d[0:1,0:1].squeeze().shape
+```
