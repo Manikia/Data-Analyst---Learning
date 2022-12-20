@@ -1,6 +1,7 @@
 #this will be for pandas and numpy
 import numpy as np
 
+
 np.__version__
 
 #matrix can contain symbols or expressions
@@ -75,6 +76,7 @@ np.dot(5,6) #this will give us 30
 # we can also do axis where axis 1 is the row and the axis 0 is rows
 array_hw_2 = np.array([[4,5],[7,10]])
 np.mean(array_hw_2, axis = 1) #will find the mean of all the rows 
+
 
 
 
