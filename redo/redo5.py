@@ -12,6 +12,7 @@
 
 # fixed width datafiles are when a file and its columns have a set width so add informastion and cant be more or less than what intended/set
 import pandas as pd
+import numpy as np
 
 filename = './redo/source.txt'
 file = open(filename, mode = 'r')
@@ -53,5 +54,35 @@ print(text2)
 
 #if we want to organize the output we can do thebelow:
 print(pd.read_csv('./redo/csv_files/Lending-company.csv', header = 0))
-
 #by using header we can change the start of the information on the #nth digit
+
+#if we dont want to use the default index value to number our output we can use index_col to move our indexes to the other column
+print(pd.read_csv('./redo/csv_files/Lending-company.csv', header = 0, index_col = 0))
+
+#if we want to name our column we use name = [] and add the new column name, we dont use columns as we thought we would
+
+#two ways to import data with numpy: np.loadtxt() and np.genfromtxt()
+#np.loadtxt() is data is ready to be imported and used and its faster
+#np.genfromtxt() indicated that the finction created the dataset from text file and is more flexible
+
+lending1 = './redo/csv_files/Lending-Company-Numeric-Data.csv'
+lending_co_1 = np.loadtxt(lending1, delimiter = ',') #delimiter means there is a separation
+print(lending_co_1)
+
+#we use the two text outputs shown to show us what is inside the text file and although both outputs are exact, if we use the np.array_equal(file1, file2) it will show us if its equal and although they output the same thing, if we input a NaN csv information to the loadtxt it will break but loads faster if we input a correct information while the genfromtxt will work but will take a longer time to process
+
+#using dtype will reformat everything as the type we are initializing as and if we use loadtxt it can work since its looking for a type but cant find it so we are setting everything even the empty cells as a type which will work when working with loadtxt
+loadtxt = np.loadtxt('./redo/csv_files/Lending-Company-Numeric-Data-NAN.csv', delimiter = ',', dtype = str)
+print(loadtxt)
+
+#if we want to skip some of the beginnig row of data we can use skip_header = # to let us know how many we want to skip, we can do the same with skip_footer to do the bottom rows
+
+#we can do the same from below but with columns instead as usecols = # which means we are telling it which ones we want to see
+
+# we can use what we have covered to set the different outputs to different variables if needed
+lending_5, lending_0, lending_1 = np.genfromtxt('./redo/csv_files/Lending-Company-Numeric-Data-NAN.csv', delimiter = ',', usecols = (5,0,1), skip_header = 2, skip_footer = 2, unpack = True) #this will set 3 different variables to each of the different edits which are the different columns and skipping the header and footer, if we were to continue this without the unpack it will return an error since its a lot of variables but to permit it we do unpack = true
+
+print(lending_5)
+print(lending_0)
+print(lending_1)
+
