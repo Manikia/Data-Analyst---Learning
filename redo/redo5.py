@@ -11,6 +11,7 @@
 #flat file database: a flat file corresponds to a single table from the relational database, it denotes a relational database composed of a single data table
 
 # fixed width datafiles are when a file and its columns have a set width so add informastion and cant be more or less than what intended/set
+import pandas as pd
 
 filename = './redo/source.txt'
 file = open(filename, mode = 'r')
@@ -43,3 +44,14 @@ with open(filename, mode = "r") as newoutput:
     print(new_out_put)
     print(new_out_put)
     
+
+#importing csv files it will return everything jumbled up
+filename2 = './redo/csv_files/Lending-company.csv'
+file2 = open(filename2, mode = 'r')
+text2 = file2.read()
+print(text2)
+
+#if we want to organize the output we can do thebelow:
+print(pd.read_csv('./redo/csv_files/Lending-company.csv', header = 0))
+
+#by using header we can change the start of the information on the #nth digit
