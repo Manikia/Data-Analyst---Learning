@@ -1,0 +1,2 @@
+- if we want o convert our raw data that we open in csv to excel we can go under the Data > Text to columns> Delimited >Next>check the delimiter>next>adjust as needed>finish and the data will all be formatted nicely
+- we cant save it and keep the same formatting if we do .csv so we have to save it as .xlsx to keep the fromat changes 
