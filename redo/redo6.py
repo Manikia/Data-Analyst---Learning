@@ -15,5 +15,8 @@ json_test = pd.read_json(json_file) #gets the data and stores it as a dataframe 
 new_csv_data = json_test
 print(new_csv_data)
 
-
+# json_file = './redo/csv_files/Lending-company.json'
+# #json_test = json.loads(json_file) #we use this to convert a string to a dictionary
+# #json_test = pd.read_json(json_file) #we use this to read the ocntext files of a json file and stores as a dataframe directly
+# print(json_test)
 
