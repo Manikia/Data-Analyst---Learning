@@ -18,3 +18,10 @@ print(csv_data_2)
 #also instead of delimiter we can use sep/delimiter
 
 #on another lesson we are going to learn how to remove the quotation when outputing
+
+singleCol = './redo/csv_files/Customer-Gender.csv'
+df_single_col = pd.read_csv(singleCol)
+print(df_single_col)
+
+#if we want to remove single dimension entries from the shape of an array we do the squeeze method
+#we use squeeze to call a series 
