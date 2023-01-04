@@ -22,12 +22,25 @@ numpySave = np.save('./redo/csv_files/Lending-Company-Saving', lending_co) #tell
 #using the np.load will make sure that the data we return in our file is returned in its original form, because if we were to import, it takes the edited form not the original
 
 original_data = np.load('./redo/csv_files/Lending-Company-Saving.npy')
-print(original_data)
+#print(original_data)
 
 
 #np.savez is another method where we can save data as a npz file
 #this type of file is a zipper archieved file names after the variables they contain
+#what savez can do is save multiple datasets in one npz file and we can just call it with its array position and we can also name them which will be shown
 
-numpySavez = np.save('./redo/csv_files/Lending-Company-Saving', lending_co)
+# lending_co = np.genfromtxt('./redo/csv_files/Lending-Company-Saving.csv', delimiter = ',', dtype = str)
+
+# original_data = np.load('./redo/csv_files/Lending-Company-Saving.npy')
+
+
+numpySavez = np.savez('./redo/csv_files/Lending-Company-Savez', lending_co, original_data)
+lending_data_savez = np.load('./redo/csv_files/Lending-Company-Savez.npz')
+print(lending_data_savez["arr_1"])  
+#print("haryNuts")
+
+
+
+
 
 
