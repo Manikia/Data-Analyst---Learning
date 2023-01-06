@@ -1,3 +1,4 @@
+import pandas as pd
 #working with text data
 #to print in python we use the same way we do in C with %s and instead of a comma when adding the variable we do %
 #like thid: print("blah blah "%s"" % product_category")
@@ -59,4 +60,42 @@ print(s4.lstrip('quarterly'))
 print(s4.rstrip('report'))
 
 
+#string accessors
+operational_kpi = pd.Series(['employee satisfaction rating', 'employee churn rate'])
+#we cannot use the typical strip insrtead we have to use the indexing to let it know which one we want to remove it from
+removedE = operational_kpi[0].lstrip('employee')
+removedE2 = operational_kpi[1].lstrip('employee')
+print(removedE)
+print(removedE2)
+
+#we can also store both of the strips in a series by doing the below:
+seriesOutput = pd.Series([operational_kpi[0].lstrip('employee'), operational_kpi[1].lstrip('employee')])
+print(seriesOutput)
+
+#string accessor looks into the object attributes, it can access the values of the series as strings instead
+operational_kpi.str #wont give us a valuable output so we have toi do the below
+print(operational_kpi.str[1]) #this will only return the character at position 1 not the value
+
+#using str we can strip and it will be able to remove everything in the series without ahviung to create multiple codes of line
+stripwStr = operational_kpi.str.lstrip('employee')
+print(stripwStr)
+
+#if not all values are string and we have a string and an int, try to remove a string we will get  NaN object output 
+
+#if we want to see if the object in our series contain a specific object we can use contain to make sure every index has what we are looking for, it will return which are true and the ones with false dont have what we are looking for included:
+
+house_prices = pd.Series(['$400,000', '$500,000', '$600,000'])
+print(house_prices.str.contains('$'))
+
+#to preprocess text data we can do the below:
+time_horizon = 1,3,12 #tuple
+products = ['Product A', 'Product B']
+
+#the .format method is only applicable in string values
+#the format can use multiple inserts when outputting and uses the curly braces in the string as placeholders for the format
+#we can also use the brackets in the string to be implicit or explicit in our positions, for example originalls when we dont add anything to the brackets its first 0 then 1 but if we switch it it will switch the way its outputted by doing prodyuct first instead of time first
+print('Expected sales for a period of {0} months for {1}:'.format(time_horizon[0], products[1]))
+#we can also use keywords instead of values
+print('Expected sales for a period of {t_hor[1]} months for {prod[1]}:'.format(t_hor = time_horizon, prod = products))
+print('Expected sales for a period of {t_hor[1]} months for {prod[1]}: ${sales}'.format(t_hor = time_horizon, prod = products, sales = 10000))
 
