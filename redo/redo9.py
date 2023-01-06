@@ -36,11 +36,25 @@ original_data = np.load('./redo/csv_files/Lending-Company-Saving.npy')
 
 numpySavez = np.savez('./redo/csv_files/Lending-Company-Savez', lending_co, original_data)
 lending_data_savez = np.load('./redo/csv_files/Lending-Company-Savez.npz')
-print(lending_data_savez["arr_1"])  
+print(lending_data_savez["arr_1"])  #calling lengins_co information since we did arr_0 but we can rename thse as well
 #print("haryNuts")
 
+#we can rename the array by doing:
+numpySavez = np.savez('./redo/csv_files/Lending-Company-Savez', lending = lending_co, original = original_data)
+lending_data2 = np.load('./redo/csv_files/Lending-Company-Savez.npz')
+#to check the different files in the npz we do:
+print(lending_data2.files)
+print('\nprinting original data\n') 
+print(lending_data2["original"]) 
 
+#learning about np.savetxt() which we will save data in text files/format
+#np.savetxt is able to save datasets to text files like .txt or .csv format
+np.savetxt('./redo/csv_files/Lending-Company-Savez.txt', lending_co,  fmt = '%s', delimiter = ',') #when using savetxt we have to add more parameters, we have to add: if its txt or csv, the format of the data which will always be after the file, formatting the data will let the compute know what kind of data it will be working with and how to format it appropriatly, 
+#format can include: c:character, d or i: signed decimal integer, e or E: scientific notation, f:decimal point, o:signed octal, u:unsigned decimal, s:string of characters, x,X:unsigned hexadecimal integer
+#when we use savetxt we have to import the file instead of loading which means we have to use genfromtxt to output it
+lending_save_txt = np.genfromtxt('./redo/csv_files/Lending-Company-Savez.txt', delimiter = ',', dtype = str)
 
+print(lending_save_txt)
 
-
+#its better to use savetxt because it can be opened in a variety of text editoprs rather than savez where its strict where it can be opened from
 
