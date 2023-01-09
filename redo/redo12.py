@@ -12,6 +12,7 @@ for n in numbers:
 print(type(new_numbers))
 
 #instead of doing the above we can create an output expression for an element in iterable
+
 new_numbers = [n*2 for n in numbers]
 print(new_numbers)
 print(type(new_numbers))
@@ -35,6 +36,12 @@ print(output)
 print([n**3 for n in range(1,11) if n %2 != 0])
 
 #when iterating we can add what we want to filter out on the right side of the function from the iteration
+for i in range(2):
+    for j in range(5):  #nested in this situation will have j printed as many times as i is presented
+        print([i,j])
+
+print([[i,j] for i in range(2) for j in range(5)])
+
 
 
 
