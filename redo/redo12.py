@@ -33,7 +33,8 @@ output = [[i+j for i in range(2)] for j in range(5)]
 print(output)
 
 #tasK deliver a list containing integers equal to the values of the generated sequence raised to the power of 3 on the condition that the values are odd numbers
-print([n**3 for n in range(1,11) if n %2 != 0])
+print([n**3 if n %2 != 0 else "even" for n in range(1,11)])
+#if we want to create an else statement the if statement needs to be in the middle or it wont work
 
 #when iterating we can add what we want to filter out on the right side of the function from the iteration
 for i in range(2):
