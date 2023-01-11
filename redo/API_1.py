@@ -25,7 +25,23 @@ print(jsonGet.json())
 # convertedJson.to_json('./redo/exportedFiles/bankAPIrequest.json')
 
 print(json.dumps(jsonGet.json(), indent = 4))
-
 print(jsonGet.json().keys())
+
+#to add parameters to a get request we use the ? and add & separating them and equal them to a value
+param_url = base_url+'?Product=AUTOMATIC PAYMENT - THANK YOU' #to stop butt from leaking
+print(param_url)
+
+request = requests.get(param_url)
+data = request.json()
+print(data)
+
+#in a best case scenario we are able to filter the parameters and in that case we would be able to call the data like an array to return the data that we requested with the symbol example since it states to return the rate of USD and GBP
+#param_url = base_url +'?symbols=GBP'+&'+'base=USD'
+#data = requests.get(param_url).json()
+#usd_to_gbp = data['rates']['GBP']
+#print(usd_gbp)
+
+
+
 
 
