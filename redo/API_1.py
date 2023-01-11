@@ -7,7 +7,7 @@
 import requests
 import json
 import pandas as pd
-base_url = 'https://jsonplaceholder.typicode.com/posts' #we are initializing a variable to the page that we want to pull/get a request from
+base_url = 'https://raw.githubusercontent.com/Manikia/Data-Analyst---Learning/main/redo/exportedFiles/bankAPIrequest.json' #we are initializing a variable to the page that we want to pull/get a request from
 
 jsonGet = requests.get(base_url)
 #to check if the process went through we do: request.ok or jsonGet.status_code
@@ -21,8 +21,8 @@ print(jsonGet.json())
     #parameters are able to pass situations where the type does not match or maybe an error might pop up so we add the parameter, there is also a separator is set as: should be an (item_separator, key_separator) tuple. The default is (', ', ': ') if *indent* is None and (',', ': ') otherwise. To get the most compact JSON representation, you should specify (',', ':') to eliminate whitespace.
 #dumps info: https://pynative.com/python-json-dumps-and-dump-for-json-encoding/
 
-convertedJson = pd.read_csv('./redo/csv_files/creditWells.csv')
-convertedJson.to_json('./redo/exportedFiles/bankAPIrequest.json')
+# convertedJson = pd.read_csv('./redo/csv_files/creditWells.csv')
+# convertedJson.to_json('./redo/exportedFiles/bankAPIrequest.json')
 
 print(json.dumps(jsonGet.json(), indent = 4))
 
