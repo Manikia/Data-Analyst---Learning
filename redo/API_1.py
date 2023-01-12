@@ -41,6 +41,11 @@ print(data)
 #usd_to_gbp = data['rates']['GBP']
 #print(usd_gbp)
 
+#we can use API request to return teh date as well by adding a start and end date like:
+#time_period = base_url +'/history'+'?start_at = 2017-04-26&end_at = 2018-04-26'+'&symbols = GBP'
+#data=requests.get(time_period).json()
+#to sort tyhe output of the dump method we do sort_keys = True and it will be in chronological order
+#json.dumps(data,indent=4, sort_keys = True)
 
 
 
