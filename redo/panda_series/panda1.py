@@ -20,6 +20,7 @@ print(prices.array)
 print(prices.values[0])
 print(type(prices.array)) #in this case the array has been built on top of the numpy series so if we want to create it where it isnt built on top and instead is an actual array we have to do, which will convert to an actual array:
 print(prices.to_numpy())
+#to_numpy will convert the series into an array
 print(prices.values[0])
 
 #all thse ways will convert it to an array:
@@ -38,4 +39,4 @@ location_data.name = 'Index'
 print(location_data.index)
 
 #remember how when we tried to sort we would only get the variables sorted not the index, well in this case we can sort the index only as well by doing: .sort_index() but the thing is that it is only a temporay manipulation and if we print it out it will be back to how it was
-#we can sort both the index and variables the same if we use ascending and both sort_index(ascending = True)
+#we can sort both the index and variables the same if we use ascending and both sort_index(ascending = True) and if we initialize it to its own variable

@@ -23,3 +23,4 @@
 - List comprehensions
 - Anonymous Lambda functions
 - API: web based
+- Converting series to arrays
