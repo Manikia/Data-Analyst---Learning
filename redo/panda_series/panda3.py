@@ -57,7 +57,19 @@ print(lending_co.iloc[[1,4], :]) #if we want different rows that arent nexct to 
 
 print(lending_co.iloc[:, [1,4]])
 
+#using .loc
 
+data3 = pd.read_csv('./redo/csv_files/Lending-company.csv', index_col = 'StringID') #im telling this that I want the index to be stringID not the default index so it will take priority when going through the table
+lending_co_data = data3.copy()
+
+#we can use loc to get the row of a table, multiple rows as well
+
+print(lending_co_data.loc['LoanID_3'])
+print(lending_co_data.loc['LoanID_3', :])
+
+print(lending_co_data.loc['LoanID_3', 'Region'])#this is basically what iloc is but instead of it being all numerical we can all the table names by its name
+
+#this location_co_data['Location'] is the same as location_co_data[:.'Location']
 
 
 
