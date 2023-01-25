@@ -72,8 +72,35 @@ print(lending_co_data.loc['LoanID_3', 'Region'])#this is basically what iloc is 
 #this location_co_data['Location'] is the same as location_co_data[:.'Location']
 
 
+data4 = pd.read_csv('./redo/csv_files/Lending-company.csv', index_col = 'LoanID')
 
+lending_c02 = data4.copy()
 
+print(lending_c02.shape)
+print(lending_c02.iloc[:,-1]) #if we want to get the last column we have to do -1
 
+#we can use iloc or loc for a series reference but it has to be one number it cant be a row and column like we usually do, only row specifier since we are already spoecifycing the column in totalprice
+print(lending_c02['TotalPrice'].iloc[0])
+#the above is basically saying lets look at the column for totalprice and go to the first position of its data which will be 17600
 
+#we can also add only the digit as a bracket but it has to match the index number ex:
+print(lending_c02['TotalPrice'][1]) #1 since the loanid starts w loanid = 1
+
+data5 = pd.read_csv('./redo/csv_files/Lending-company.csv', index_col = 'StringID')
+lending_co3 = data5.copy()
+
+#we can also use the name of both column and row to get our output 
+print(lending_co3['TotalPrice']['LoanID_1'])
+
+#we can also add multiple by doing the below:
+print(lending_co3.loc[['LoanID_1','LoanID_6'], :])
+#with the above we get two different rows with all the columns 
+print(lending_co3.loc[['LoanID_1','LoanID_6'], ['Product']])
+
+#we can also call it as a dataframe by doing:
+print(lending_co3.TotalPrice['LoanID_1'])
+
+#the only time we can combine iloc and loc is if we want to refer to the position of certain wvalues in the DF column
+print(lending_co3.loc[:, 'TotalPrice'].iloc[[0,5]])
+#in this case we are saying we want to look at all the columns with total price but we are limiting our search to only show the first and 6th row
 
