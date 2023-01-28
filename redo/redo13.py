@@ -17,10 +17,11 @@ print((lambda x:x**2)(3))
 #lambdas can also have multiple parameters
 sum_xy = lambda x,y:x+y
 print(sum_xy(2,3))
-
+""""""
 #we can also create a fuinction where y(x) we have to create another function for the y in y(x). in these type of numberic we can let x be a numeric value but y has to be a function
 sum_xy = lambda x,y : x+y(x)
 print(sum_xy(2, lambda x: x*5))
+
 
     #off topic that it didnt cover but it uses in the exercise is filtering a list
     #filtering is uses by passing a parameter and returning only what is true
